@@ -1,0 +1,60 @@
+#include<iostream>
+#include<cstring>
+#include<fstream>
+ using namespace std;
+ class Worker
+{
+      string surname;
+      int experience, salaryh, hours, salary;
+      double premy;
+      public:
+             void setWorker(string a, int b, int c, int h)
+             {
+                  surname = sn;
+                  experience = b;
+                  salaryh = c;
+                  hours = d;
+                  double p;
+                  int e;
+                  e = c*h;
+                  salary = e;
+                  if (b<1) p=0;
+                  else
+                  {
+                      if (b>=1 && b<3) p=0.05*e;
+                      else
+                      {
+                         if (b>=3 && b<5) p=0.08*e;
+                         else
+                         {
+                            if (b>=5) p=0.15*e;
+                         }
+                      }
+                  }
+                  premy = p;
+             }
+             void getWorker()
+             {
+                  cout<<surname<<endl<<"Experience is "<<experience<<endl<<"Hourly wage is "<<salaryh<<endl<<surname<<" has worked "<<hours<<" hours"<<endl<<"Salary is "<<salary<<endl<<"Premy is "<<premy<<endl;
+                  cout<<"Information about "<<surname<<" was written in file 'Workers.txt'"<<endl;
+                  ofstream file;
+                  file.open("Workers.txt", ios_base::app);
+                  file<<surname<<endl<<"Experience is "<<experience<<endl<<"Hourly wage is "<<salaryh<<endl<<surname<<" has worked "<<hours<<" hours"<<endl<<"Salary is "<<salary<<endl<<"Premy is "<<premy<<endl<<endl<<endl;
+                  file.close();
+             }               
+};
+ 
+int main()
+{
+    string surname;
+    int experience, salaryh, hours, salary, premy;
+    cout<<"Enter worker's name: "; cin>>surname; cout<<endl;
+    cout<<"Enter worker's experience: "; cin>>experience; cout<<endl;
+    cout<<"Enter worker's hourly wag: "; cin>>salaryh; cout<<endl;
+    cout<<"Enter how much hours "<<surname<<" has worked: "; cin>>hours; cout<<endl;
+    Worker objWorker;
+    objWorker.setWorker(surname, experience, salaryh, hours);
+    objWorker.getWorker();
+    system ("pause");
+    return 0;
+}
