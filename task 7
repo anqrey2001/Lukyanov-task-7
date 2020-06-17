@@ -1,0 +1,138 @@
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Address
+{
+private:
+    string State;
+    string City;
+    string Street;
+    int PostalCode;
+public:
+    Address(string state, string city, string street, int code)
+    {
+        State = state;
+        City = city;
+        Street = street;
+        PostalCode = code;
+    }
+    Address(){}
+
+    void OutputAsLabel()
+    {
+        cout << "Address" << State << " " << City << " " << Street << " " << PostalCode << endl;
+    }
+};
+
+class Person
+{
+protected:
+    string Name;
+    string Email;
+    long long PhoneNumber;
+    Address* _Address;
+public:
+    Person(string name, string email, long long phone, Address* address)
+    {
+        Name = name;
+        Email = email;
+        PhoneNumber = phone;
+        _Address = address;
+    }
+    Person(){}
+
+    virtual void Print()
+    {
+        cout << Name << endl << Email << endl << PhoneNumber << endl;
+        _Address->OutputAsLabel();
+    }
+};
+
+class Worker : public Person
+{
+private:
+    int Salary;
+    int Expirience;
+    int Hours;
+    int Premy;
+public:
+    Worker(int salary, int expirience, int hours, int premy, string name, string email, long long phone, Address* address) : Person(name, email, phone, address)
+    {
+        Salary = salary;
+        Expirience = expirience;
+        Hours = hours;
+        Premy = premy;
+    }
+    virtual void Print()
+    {
+        Person::Print();
+        cout << Salary << endl;
+        cout << Expirience << endl;
+        cout << Hours << endl;
+        cout << Premy << endl;
+    }
+};
+
+class Student : public Person
+{
+private:
+    int Number;
+    int AverageMark;
+public:
+    Student(int number,int mark, string name, string email, long long phone, Address* address) : Person(name, email, phone, address)
+    {
+        Number = number;
+        AverageMark = mark;
+    }
+    Student(){}
+
+    bool IsEligibleToEnroll()
+    {
+        return AverageMark >= 3;
+    }
+    virtual void Print()
+    {
+        Person::Print();
+        cout << Number << endl;
+        cout << AverageMark << endl;
+    }
+
+};
+
+class Mirea
+{
+private:
+    vector<Student*> Students;
+    vector<Worker*> Workers;
+public:
+    void AddStudent(Student* student)
+    {
+        Students.push_back(student);
+    }
+    void AddWorker(Worker* worker)
+    {
+        Workers.push_back(worker);
+    }
+
+    void PrintStudents()
+    {
+        for (int i = 0; i < Students.size(); i++)
+        {
+            Students[i]->Print();
+        }
+    }
+    void PrintWorkers()
+    {
+        for (int i = 0; i < Workers.size(); i++)
+        {
+            Workers[i]->Print();
+        }
+    }
+};
+
+int main()
+{
+    
+}
